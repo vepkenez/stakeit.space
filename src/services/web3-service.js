@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import {Escrow, instancePolicy, Token, Worklock, WORKLOCK_ADDRESS} from '../ethereum/instances/instances';
-// import { convertMS } from '../utils/utils';
+import { daysToPeriods } from '../utils/utils';
 
 const web3 = new Web3(window.ethereum);
 
@@ -341,7 +341,7 @@ export default class ServiceWeb3 {
       setters.prolongStake = async (index, periods) => {
          try {
             const accounts = await web3.eth.getAccounts();
-            await Escrow.methods.prolongStake(index, periods).send({ from: accounts[0] });
+            await Escrow.methods.prolongStake(index, daysToPeriods(periods)).send({ from: accounts[0] });
          } catch (err) {
             console.error('Error', err);
          }
@@ -355,7 +355,7 @@ export default class ServiceWeb3 {
             // console.log(typeof nits);
             // console.log(nits);
 
-            await Escrow.methods.divideStake(index, nits, periods).send({ from: accounts[0] });
+            await Escrow.methods.divideStake(index, nits, daysToPeriods(periods)).send({ from: accounts[0] });
          } catch (err) {
             console.error('Error', err);
          }

@@ -1,6 +1,10 @@
 
 export const daysPerPeriod = 7
 
+export const daysToPeriods = (days) => {
+  return Math.ceil(parseInt(days)/daysPerPeriod).toString()
+}
+
 export const hexToBytes = hex => {
   hex = hex.toString(16)
   hex = hex.replace(/^0x/i, "")
@@ -49,7 +53,7 @@ export const convertMSMod = milliseconds => {
 }
 
 export const substakeObjectCreator = object => {
-  const periodMS = 86400000 * 7;
+  const periodMS = 86400000 * daysPerPeriod;
   let currentDate = Date.now();
   let endDate = new Date(object.lastPeriod * periodMS);
   return {
