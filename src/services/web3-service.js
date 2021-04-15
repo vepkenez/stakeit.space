@@ -32,7 +32,6 @@ export default class ServiceWeb3 {
 
       const nits = await Token.methods.balanceOf(stakerData.account).call();
       stakerData.balanceNu = parseFloat(nits) / 10 ** 18;
-
       return stakerData;
    };
 
@@ -60,9 +59,6 @@ export default class ServiceWeb3 {
       // Calculate Stakers unlocked NU
       const stakerUnlockedNits = web3.utils.toBN(StakerInfo.value).sub(web3.utils.toBN(lockedStakerNits));
       const stakerNuUnlocked = web3.utils.fromWei(stakerUnlockedNits, 'ether');
-
-      const isReStakeLockedBool = await Escrow.methods.isReStakeLocked(account).call();
-      const isRestakeLocked = isReStakeLockedBool ? 'Locked' : 'Unlocked';
 
       // get substake length by substake index
       const getSubStakesLength = await Escrow.methods.getSubStakesLength(account).call();
@@ -95,7 +91,6 @@ export default class ServiceWeb3 {
          workerEthBal: workerBal,
          staker: account,
          worker: StakerInfo.worker,
-         status: isRestakeLocked,
          windDown: stakerFlags.windDown,
          reStakeDisabled: !stakerFlags.reStake,
          subStakesLength: getSubStakesLength,
