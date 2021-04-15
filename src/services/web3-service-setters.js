@@ -20,12 +20,12 @@ export default class ServiceWeb3Setters {
    };
 
    prolongStake = async (index, periods) => {
-      return await Escrow.methods.prolongStake(index, periods).send({ from: this._getAccount() });
+      return await Escrow.methods.prolongStake(index, Math.floor(periods/utils.daysPerPeriod)).send({ from: this._getAccount() });
    };
 
    divideStake = async (index, value, periods) => {
       const nits = utils.toWei(value, 'ether');
-      return await Escrow.methods.divideStake(index, nits, periods).send({ from: this._getAccount() });
+      return await Escrow.methods.divideStake(index, nits, Math.floor(periods/utils.daysPerPeriod)).send({ from: this._getAccount() });
    };
 
    withdrawNu = async amount => {
