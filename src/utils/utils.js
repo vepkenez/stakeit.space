@@ -1,3 +1,6 @@
+
+export const daysPerPeriod = 7
+
 export const hexToBytes = hex => {
   hex = hex.toString(16)
   hex = hex.replace(/^0x/i, "")
