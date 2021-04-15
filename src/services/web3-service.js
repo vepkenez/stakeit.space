@@ -93,6 +93,7 @@ export default class ServiceWeb3 {
          worker: StakerInfo.worker,
          windDown: stakerFlags.windDown,
          reStakeDisabled: !stakerFlags.reStake,
+         migrated: stakerFlags.migrated,
          subStakesLength: getSubStakesLength,
          substakeList: getAllSubstakes,
          StakerInfo: StakerInfo,
